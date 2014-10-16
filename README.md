@@ -1,31 +1,33 @@
 # Examplify
 
-TODO: Write a gem description
+Examplify squashes multiple files together into one for easily pasting into a
+gist or a markdown document. It puts comments/headers with the filenames.
 
-## Installation
+## Example output
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'examplify'
 ```
+# /root/file.rb
+contents of file.rb
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install examplify
+# /root/another_file.rb
+contents of another_file.rb
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+```bash
+# entire folder
+examplify project/
 
-## Contributing
+# only ruby files
+examplify project/ --only=rb
 
-1. Fork it ( https://github.com/[my-github-username]/examplify/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+# choose specific files
+examplify file.rb file2.rb
+
+# markdownish output
+examplify project/ --file-prefix="## " --line-prefix="    "
+
+# more advanced markdown
+examplify project/ --only=rb --file-prefix="## " --before-file="```ruby" --after-file="```"
+```
