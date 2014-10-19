@@ -1,6 +1,8 @@
 
 describe "examplify" do
 
+  # TODO: Tempdir
+
   # TODO: no extra newline
   # TODO: no extra slash
   it "outputs files from a folder" do
@@ -11,6 +13,10 @@ describe "examplify" do
       # ./spec/dummy/two.rb
       puts "Two"
     OUTPUT
+  end
+
+  it "joins paths correctly" do
+    expect(examplify "./spec/dummy").to eq examplify "./spec/dummy/"
   end
 
   it "ouputs manually listed files" do
@@ -30,7 +36,7 @@ describe "examplify" do
     OUTPUT
   end
 
-  it "-n test-run" do
+  it "can do a dry-run" do
     expect(examplify "./spec/dummy -n").to eq <<-OUTPUT.deindent
       ./spec/dummy/one.rb
       ./spec/dummy/two.rb

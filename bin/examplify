@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
+
 require "docopt"
+require './lib/examplify.rb'
 
 doc = <<DOCOPT
 Examplify
@@ -10,74 +12,25 @@ Usage:
   examplify --version
 
 Options:
-  -h --help     Show this screen.
-  --version     Show version.
-  -n --dry-run  Only output paths.
+  -h --help        Show this screen.
+  --version        Show version.
+  -n --dry-run     Only output paths.
+  --exclude=glob   Glob pattern of files to exclude.
 
 DOCOPT
-
-
-# require 'rake/file_list'
-# path = "./spec"
-# Dir.glob("#{path}/**/*").reject { |path| File.directory? path }       # => ["./spec/dummy/one.rb", "./spec/dummy/two.rb", "./spec/feature_spec.rb", "./spec/spec_helper.rb"]
-# Rake::FileList["#{path}/**/*"].reject { |path| File.directory? path } # => ["./spec/dummy/one.rb", "./spec/dummy/two.rb", "./spec/feature_spec.rb", "./spec/spec_helper.rb"]
-
-module Examplify
-
-  attr_reader :files
-  class FileList
-    def initialize(paths)
-      @files = get_all_files(paths)      
-    end
-  end
-end
-
-  # given a path or a list of paths to folders or files
-  # returns an array of paths to all files given, and
-  # all files contained in subdirectories of folders,
-  # but without the folders
-  def get_all_files(paths)
-    paths = Array(paths)
-
-    paths.flat_map do |path|
-      if File.directory? path
-        list = Dir.glob("#{path}/**/*")
-        list.reject { |path| File.directory? path } # don't care about directories
-      else
-        [path]
-      end
-    end
-  end
 
 begin
   options = Docopt::docopt(doc)
 
-  files = get_all_files(options['<paths>'])
+  fl = Examplify::FileList.new(options["<paths>"])
+  fl.exclude(options["--exclude"])
 
-  require 'rake'
-  files = Rake::FileList[files]
-
-  # EXCLUDE
-  if options['--exclude']
-    files.exclude do |file|
-      filename = file.pathmap("%n")
-      File.fnmatch(options['--exclude'], filename, File::FNM_DOTMATCH)
-    end
-  end
-
-  # DRY RUN
   if options['--dry-run']
-    puts files
+    puts fl.files
   else
-    puts files.map { |file| "# #{file}\n#{File.read(file)}" }.join("\n")
+    puts fl.output
   end
-
 
 rescue Docopt::Exit => e
   puts e.message
 end
-
-# >> Usage:
-# >>   examplify <paths>... [--exclude=glob] [--dry-run]
-# >>   examplify -h | --help
-# >>   examplify --version
