@@ -32,7 +32,7 @@ class Examplify
   private
 
   def glob_matches_file(glob, path)
-    filename = path.pathmap("%n")
+    filename = path.pathmap("%f")
     File.fnmatch(glob, filename, File::FNM_DOTMATCH)
   end
 

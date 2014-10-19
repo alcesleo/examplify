@@ -27,7 +27,7 @@ describe "examplify" do
   end
 
   it "excludes files by globbing" do
-    expect(examplify "./spec/dummy --exclude=two*").to eq <<-OUTPUT.deindent
+    expect(examplify "./spec/dummy --exclude=*o.rb").to eq <<-OUTPUT.deindent
       # ./spec/dummy/one.rb
       puts "One"
     OUTPUT
