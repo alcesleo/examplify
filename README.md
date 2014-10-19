@@ -28,3 +28,9 @@ examplify project/ --exclude=*.md
 # choose specific files
 examplify file.rb file2.rb
 ```
+
+## Caveats
+
+- globbing only matches on filenames for now
+- zsh users probably want to `noglob examplify`, otherwise the shell will try to glob
+- **very** weird behaviour can occur when dogfeeding this gem and not exluding the `.gem` files.
