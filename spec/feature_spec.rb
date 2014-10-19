@@ -1,4 +1,3 @@
-
 describe "examplify" do
 
   # TODO: Tempdir
@@ -49,17 +48,5 @@ describe "examplify" do
   end
 
   # it "file-prefix, line-prefix"
-  # it "exclude|only"
   # it "git ls-files"
-  # it "errors"
-end
-
-def examplify(arguments)
-  `ruby ./bin/examplify #{arguments}`
-end
-
-class String
-  def deindent
-    self.gsub(/ {6}/, '')
-  end
 end
