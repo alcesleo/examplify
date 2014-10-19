@@ -8,26 +8,32 @@ class Examplify
   end
 
   def exclude(glob)
-    files.exclude do |file|
-      glob_matches_file(glob, file)
+    files.exclude do |path|
+      glob_matches_file(glob, path)
     end
   end
 
-  # inverse of filter
+  # inverse of exclude
   def filter(glob)
-    files.exclude do |file|
-      !glob_matches_file(glob, file)
+    files.exclude do |path|
+      !glob_matches_file(glob, path)
     end
   end
 
   def output
-    files.map { |file| "# #{file}\n#{File.read(file)}" }.join("\n")
+    files.map { |path|
+      title   = ["# ", path].join
+      content = File.read(path)
+
+      [title, content].join("\n")
+    }.join("\n")
   end
 
   private
 
-  def glob_matches_file(glob, file)
-    File.fnmatch(glob, file.pathmap("%n"), File::FNM_DOTMATCH)
+  def glob_matches_file(glob, path)
+    filename = path.pathmap("%n")
+    File.fnmatch(glob, filename, File::FNM_DOTMATCH)
   end
 
   # given a path or a list of paths to folders or files
