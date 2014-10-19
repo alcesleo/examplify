@@ -6,10 +6,10 @@ gist or a markdown document. It puts comments/headers with the filenames.
 ## Example output
 
 ```
-# /root/file.rb
+# root/file.rb
 contents of file.rb
 
-# /root/another_file.rb
+# root/another_file.rb
 contents of another_file.rb
 ```
 
@@ -20,18 +20,11 @@ contents of another_file.rb
 examplify project/
 
 # only ruby files
-examplify project/ --only=rb
+examplify project/ --only=*.rb
 
 # without some files
-examplify project/ --exclude=.rb
-
+examplify project/ --exclude=*.md
 
 # choose specific files
 examplify file.rb file2.rb
-
-# markdownish output
-examplify project/ --file-prefix="## " --line-prefix="    "
-
-# more advanced markdown
-examplify project/ --only=rb --file-prefix="## " --before-file="```ruby" --after-file="```"
 ```
