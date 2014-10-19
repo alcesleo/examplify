@@ -3,8 +3,6 @@ describe "examplify" do
 
   # TODO: Tempdir
 
-  # TODO: no extra newline
-  # TODO: no extra slash
   it "outputs files from a folder" do
     expect(examplify "./spec/dummy").to eq <<-OUTPUT.deindent
       # ./spec/dummy/one.rb
@@ -33,6 +31,13 @@ describe "examplify" do
     expect(examplify "./spec/dummy --exclude=two*").to eq <<-OUTPUT.deindent
       # ./spec/dummy/one.rb
       puts "One"
+    OUTPUT
+  end
+
+  it "filters files by globbing" do
+    expect(examplify "./spec/dummy --only=two*").to eq <<-OUTPUT.deindent
+      # ./spec/dummy/two.rb
+      puts "Two"
     OUTPUT
   end
 
