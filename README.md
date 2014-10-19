@@ -22,6 +22,10 @@ examplify project/
 # only ruby files
 examplify project/ --only=rb
 
+# without some files
+examplify project/ --exclude=.rb
+
+
 # choose specific files
 examplify file.rb file2.rb
 

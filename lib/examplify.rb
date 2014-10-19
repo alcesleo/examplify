@@ -1,4 +1,4 @@
-require "examplify/version"
+require_relative "./examplify/version"
 
 module Examplify
   # Your code goes here...
