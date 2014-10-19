@@ -23,15 +23,15 @@ DOCOPT
 begin
   options = Docopt::docopt(doc)
 
-  fl = Examplify.new(options["<paths>"])
+  list = Examplify.new(options["<paths>"])
 
-  fl.filter(options["--only"])     if options["--only"]
-  fl.exclude(options["--exclude"]) if options["--exclude"]
+  list.filter(options["--only"])     if options["--only"]
+  list.exclude(options["--exclude"]) if options["--exclude"]
 
   if options['--dry-run']
-    puts fl.files
+    puts list.files
   else
-    puts fl.output
+    puts list.output
   end
 
 rescue Docopt::Exit => e
