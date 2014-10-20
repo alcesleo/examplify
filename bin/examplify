@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require "docopt"
-require './lib/examplify.rb'
+require_relative '../lib/examplify.rb'
 
 doc = <<DOCOPT
 Examplify
