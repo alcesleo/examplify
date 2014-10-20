@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "examplify"
-  spec.version       = "0.1.0"
+  spec.version       = "0.1.1"
   spec.authors       = ["Jimmy Börjesson"]
   spec.email         = ["lagginglion@gmail.com"]
   spec.summary       = "Outputs an entire project with filenames as comments."
